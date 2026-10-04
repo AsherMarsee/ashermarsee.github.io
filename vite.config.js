@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/personal-site/', // Must match your GitHub repository name exactly
+  base: '/', // Must match your GitHub repository name exactly
 })

@@ -22,7 +22,7 @@ const projects = [
     description:
       'Share an app, site, or tool you built. Explain the problem, your approach, and the technologies you used.',
     tags: ['Development', 'Add technologies'],
-    color: 'cyan',
+    color: 'teal',
   },
   {
     number: '03',
@@ -31,7 +31,7 @@ const projects = [
     description:
       'Introduce your tabletop roleplaying project and the part of its design you would most like to share.',
     tags: ['TTRPG', 'Game design', 'In progress'],
-    color: 'cornflowerblue',
+    color: 'blue',
   },
 ]
 

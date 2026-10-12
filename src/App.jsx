@@ -115,8 +115,8 @@ function HomePage() {
           </h1>
           <p className="hero-description">
             I’m a <strong>content creator, software developer, and
-            game designer</strong>. I make things, share what
-            I learn, and dream up tabletop worlds.
+            game designer</strong>. This is my personal website for
+            sharing my projects and links to my other accounts.
           </p>
           <div className="hero-actions">
             <a className="button button-dark" href="#portfolio">

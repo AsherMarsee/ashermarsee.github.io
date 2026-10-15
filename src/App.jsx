@@ -1,67 +1,34 @@
 import { useEffect, useState } from 'react'
-import heroImg from './assets/hero.png'
 import './App.css'
 
-const pages = ['home', 'portfolio', 'orbellion']
+const email = 'asher@ashermarsee.com'
 const copyrightYear = new Date().getFullYear()
 
 const projects = [
   {
+    slug: 'jet-slalom',
+    title: 'Jet Slalom',
+    type: 'Game development',
+    summary: 'A game project developed as part of an internship.',
+    detail: 'Jet Slalom is a game development internship project. This portfolio entry is intentionally concise; additional project details can be added as they are ready to share.',
     number: '01',
-    type: 'Content creation · Add a year',
-    title: 'A video or stream series',
-    description:
-      'Describe a channel, series, or piece of content. Add what you made, who it was for, and what you learned.',
-    tags: ['Video', 'Streaming', 'Community'],
-    color: 'sky',
   },
   {
+    slug: 'ashers-acai',
+    title: "Asher's Acai",
+    type: 'Minecraft modpack',
+    summary: 'A custom Minecraft modpack project.',
+    detail: "Asher's Acai is a custom Minecraft modpack. More information about its design, tools, and development can be added here as the project is documented.",
     number: '02',
-    type: 'Software development · Add a year',
-    title: 'A software project',
-    description:
-      'Share an app, site, or tool you built. Explain the problem, your approach, and the technologies you used.',
-    tags: ['Development', 'Add technologies'],
-    color: 'teal',
-  },
-  {
-    number: '03',
-    type: 'Game design · Add a year',
-    title: 'Orbellion',
-    description:
-      'Introduce your tabletop roleplaying project and the part of its design you would most like to share.',
-    tags: ['TTRPG', 'Game design', 'In progress'],
-    color: 'blue',
   },
 ]
-
-const socialLinks = [
-  { name: 'GitHub', url: 'https://github.com/AsherMarsee' },
-  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/asher-marsee-826873191/' },
-  { name: 'YouTube', url: 'https://www.youtube.com/@AsherMarsee' },
-  { name: 'Twitch', url: 'https://www.twitch.tv/AsherMarsee' },
-  { name: 'Bluesky', url: 'https://bsky.app/profile/ashermarsee.com' },
-  { name: 'General email', url: 'mailto:contact@ashermarsee.com' },
-]
-
-function currentPage() {
-  const page = window.location.hash.slice(1)
-  return pages.includes(page) ? page : 'home'
-}
 
 function ArrowIcon({ diagonal = false }) {
   return (
-    <svg
-      aria-hidden="true"
-      className="arrow-icon"
-      viewBox="0 0 16 16"
-      fill="none"
-    >
-      {diagonal ? (
-        <path d="M4 12 12 4M5 4h7v7" />
-      ) : (
-        <path d="M2.5 8h10m-4-4 4 4-4 4" />
-      )}
+    <svg aria-hidden="true" className="arrow-icon" viewBox="0 0 16 16" fill="none">
+      {diagonal
+        ? <path d="M4 12 12 4M5 4h7v7" />
+        : <path d="M2.5 8h10m-4-4 4 4-4 4" />}
     </svg>
   )
 }
@@ -69,25 +36,16 @@ function ArrowIcon({ diagonal = false }) {
 function Header({ activePage }) {
   return (
     <header className="site-header">
-      <a aria-label="Asher Marsee, home" className="wordmark" href="#home">
-        <span className="wordmark-mark">AM</span>
+      <a className="wordmark" href="#/home" aria-label="Asher Marsee home">
+        <span className="wordmark-initials">AM</span>
         <span>Asher Marsee</span>
       </a>
       <nav aria-label="Main navigation" className="main-nav">
-        {pages.map((page) => (
-          <a
-            aria-current={activePage === page ? 'page' : undefined}
-            className={activePage === page ? 'nav-link active' : 'nav-link'}
-            href={`#${page}`}
-            key={page}
-          >
-            {page === 'portfolio' ? 'Portfolio' : page === 'orbellion' ? 'Orbellion' : page}
-          </a>
-        ))}
+        <a className={activePage === 'home' ? 'nav-link active' : 'nav-link'} aria-current={activePage === 'home' ? 'page' : undefined} href="#/home">Home</a>
+        <a className={activePage === 'portfolio' ? 'nav-link active' : 'nav-link'} aria-current={activePage === 'portfolio' ? 'page' : undefined} href="#/portfolio">Portfolio</a>
+        <a className={activePage === 'resume' ? 'nav-link active' : 'nav-link'} aria-current={activePage === 'resume' ? 'page' : undefined} href="#/resume">Resume</a>
       </nav>
-      <a className="header-contact" href="mailto:business@ashermarsee.com">
-        Business inquiries <ArrowIcon diagonal />
-      </a>
+      <a className="header-contact" href={`mailto:${email}`}>Get in touch <ArrowIcon diagonal /></a>
     </header>
   )
 }
@@ -95,170 +53,229 @@ function Header({ activePage }) {
 function Footer() {
   return (
     <footer className="site-footer">
-      <span>Made by Asher Marsee</span>
-      <a href="#home">Back to top ↑</a>
-      <span>© {copyrightYear}</span>
+      <a href={`mailto:${email}`}>{email}</a>
+      <span>© {copyrightYear} Asher Marsee</span>
+      <a href="#/home">Back to top ↑</a>
     </footer>
+  )
+}
+
+function SectionLabel({ children }) {
+  return <p className="section-label"><span />{children}</p>
+}
+
+function ProjectCard({ project }) {
+  return (
+    <article className="project-card">
+      <a className={`project-visual visual-${project.number}`} href={`#/portfolio/${project.slug}`} aria-label={`View ${project.title} project`}>
+        <span className="visual-number">{project.number}</span>
+        <span className="visual-orbit orbit-a" />
+        <span className="visual-orbit orbit-b" />
+        <span className="visual-monogram">{project.number === '01' ? 'JS' : 'AA'}</span>
+        <span className="visual-open"><ArrowIcon diagonal /></span>
+      </a>
+      <div className="project-info">
+        <div className="project-heading">
+          <div>
+            <p className="project-type">{project.type}</p>
+            <h3><a href={`#/portfolio/${project.slug}`}>{project.title}</a></h3>
+          </div>
+          <span className="project-index">{project.number}</span>
+        </div>
+        <p className="project-summary">{project.summary}</p>
+        <a className="inline-link" href={`#/portfolio/${project.slug}`}>View project <ArrowIcon /></a>
+      </div>
+    </article>
   )
 }
 
 function HomePage() {
   return (
     <>
-      <section className="home-hero">
-        <div className="hero-copy">
-          <p className="eyebrow"><span className="status-dot" /> Open to work and collaboration</p>
-          <h1>
-            Hello, I’m
-            <br />
-            <span className="accent-text">Asher.</span>
-          </h1>
-          <p className="hero-description">
-            I’m a <strong>content creator, software developer, and
-            game designer</strong>. This is my personal website for
-            sharing my projects and links to my other accounts.
+      <section className="hero content-width">
+        <div className="hero-content">
+          <SectionLabel>SOFTWARE DEVELOPER · GAME DESIGNER</SectionLabel>
+          <h1>Building thoughtful<br />digital experiences<span className="accent-dot">.</span></h1>
+          <p className="hero-summary">
+            I’m Asher Marsee, a software developer and game designer. I enjoy turning ideas into considered, useful experiences—from game projects to software.
           </p>
           <div className="hero-actions">
-            <a className="button button-dark" href="#portfolio">
-              View my portfolio <ArrowIcon />
-            </a>
-            <a className="text-link" href="#orbellion">
-              Explore Orbellion <ArrowIcon />
-            </a>
+            <a className="button button-primary" href="#/portfolio">Explore my work <ArrowIcon /></a>
+            <a className="button button-secondary" href="#/resume">View resume <ArrowIcon diagonal /></a>
           </div>
+          <a className="hero-email" href={`mailto:${email}`}>{email}</a>
         </div>
-        <div aria-label="Abstract layered illustration" className="hero-art">
-          <span className="art-orbit orbit-one" />
-          <span className="art-orbit orbit-two" />
-          <span className="art-label">Create · Code<br />& imagine</span>
-          <img src={heroImg} alt="" />
-          <span className="art-caption">ASHER MARSEE — CREATOR & DESIGNER</span>
+        <div className="hero-composition" aria-hidden="true">
+          <div className="composition-grid" />
+          <div className="composition-card">
+            <span className="composition-kicker">SELECTED WORK</span>
+            <span className="composition-title">Ideas into<br /><em>experience.</em></span>
+            <span className="composition-rule" />
+            <span className="composition-foot"><span>AM</span><span>DESIGN · DEVELOPMENT</span></span>
+          </div>
+          <span className="composition-index">01 / 02</span>
         </div>
       </section>
 
-      <section aria-labelledby="social-heading" className="home-social">
-        <div className="home-social-intro">
-          <p className="section-kicker">FIND ME ONLINE</p>
-          <h2 id="social-heading">Let’s connect<span className="accent-text">.</span></h2>
-          <p>Follow along, see what I’m making, or get in touch about work.</p>
+      <section className="intro-band">
+        <div className="content-width intro-inner">
+          <SectionLabel>A LITTLE ABOUT ME</SectionLabel>
+          <p>I bring a mix of creative thinking and technical curiosity to my work. I’m interested in building clear, engaging experiences and contributing to teams that care about craft.</p>
+          <a className="inline-link" href="#/resume">More about my experience <ArrowIcon /></a>
         </div>
-        <div className="social-list">
-          {socialLinks.map(({ name, url }) => (
-            <a href={url} key={name} rel="noreferrer" target="_blank">
-              {name} <ArrowIcon diagonal />
-            </a>
-          ))}
+      </section>
+
+      <section className="featured-section content-width" aria-labelledby="featured-heading">
+        <div className="section-heading">
+          <div>
+            <SectionLabel>SELECTED WORK</SectionLabel>
+            <h2 id="featured-heading">A few projects<span className="accent-dot">.</span></h2>
+          </div>
+          <a className="inline-link" href="#/portfolio">View all projects <ArrowIcon /></a>
+        </div>
+        <div className="project-grid">
+          {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
+        </div>
+      </section>
+
+      <section className="contact-band">
+        <div className="content-width contact-inner">
+          <div>
+            <SectionLabel>LET’S CONNECT</SectionLabel>
+            <h2>Have a role or project in mind?</h2>
+          </div>
+          <a className="button button-light" href={`mailto:${email}`}>Email me <ArrowIcon diagonal /></a>
         </div>
       </section>
     </>
   )
 }
 
-function ProjectCard({ project }) {
-  return (
-    <article className="project-card">
-      <div className={`project-art ${project.color}`}>
-        <span className="project-number">{project.number}</span>
-        <span aria-hidden="true" className="project-art-shape" />
-        <span className="project-type">{project.type}</span>
-      </div>
-      <div className="project-copy">
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        <ul aria-label="Project skills" className="tag-list">
-          {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-        </ul>
-      </div>
-    </article>
-  )
-}
-
 function PortfolioPage() {
   return (
-    <section className="inner-page">
+    <section className="page content-width">
       <div className="page-intro">
-        <p className="section-kicker">CONTENT · CODE · GAME DESIGN</p>
-        <h1>My <span className="accent-text">portfolio.</span></h1>
-        <p>
-          I’m looking for opportunities in content creation, software
-          development, and game design. Here are a few places to showcase what
-          I’ve made—replace the starter copy with your projects and links.
-        </p>
+        <SectionLabel>PORTFOLIO</SectionLabel>
+        <h1>Selected work<span className="accent-dot">.</span></h1>
+        <p>A selection of game and software projects. Each entry is focused on the work itself and the context available to share.</p>
       </div>
-      <div className="project-grid work-grid">
-        {projects.map((project) => <ProjectCard key={project.number} project={project} />)}
+      <div className="project-grid portfolio-grid">
+        {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
       </div>
-      <div className="inline-note">
-        <span className="note-star">✳</span>
-        <p>Have a role or project in mind? I’d love to hear about it.</p>
-        <a className="text-link" href="mailto:business@ashermarsee.com">Business inquiries <ArrowIcon /></a>
+      <div className="page-contact">
+        <p>Interested in discussing a project or opportunity?</p>
+        <a className="inline-link" href={`mailto:${email}`}>{email} <ArrowIcon diagonal /></a>
       </div>
     </section>
   )
 }
 
-function OrbellionPage() {
+function ResumePage() {
   return (
-    <section className="inner-page pitch-page">
-      <div className="page-intro">
-        <p className="section-kicker">A TABLETOP ROLEPLAYING PROJECT</p>
-        <h1><span className="accent-text">Orbellion.</span></h1>
-        <p>
-          Orbellion is my tabletop roleplaying game project. This page is a
-          space to introduce its world, explain what players do, and share how
-          the project is taking shape.
-        </p>
+    <section className="page content-width resume-page">
+      <div className="resume-top">
+        <div className="page-intro">
+          <SectionLabel>RESUME</SectionLabel>
+          <h1>Asher Marsee<span className="accent-dot">.</span></h1>
+          <p>Software developer · Game designer</p>
+        </div>
+        <button className="button button-primary print-button" onClick={() => window.print()} type="button">
+          Print / save as PDF <ArrowIcon />
+        </button>
       </div>
-      <div className="pitch-feature">
-        <div className="pitch-art">
-          <span className="pitch-art-label">ORBELLION<br />WORLD NOTES</span>
-          <img src={heroImg} alt="" />
-          <span className="pitch-art-caption">[Add a tagline or piece of lore]</span>
-        </div>
-        <div className="pitch-details">
-          <p className="section-kicker">THE SHORT VERSION</p>
-          <h2>[What makes Orbellion an adventure worth playing?]</h2>
-          <p>
-            In <strong>Orbellion</strong>, players [describe who they play as]
-            and [what they do]. Set in [describe the setting], the game is about
-            [themes, tone, or central conflict]. Use this space for a concise
-            pitch that helps a new reader picture a session.
-          </p>
-          <dl className="pitch-facts">
-            <div><dt>Format</dt><dd>Tabletop roleplaying game</dd></div>
-            <div><dt>Genre / tone</dt><dd>[Add genre and tone]</dd></div>
-            <div><dt>Status</dt><dd>[Add current development stage]</dd></div>
-          </dl>
+      <div className="resume-contact">
+        <a href={`mailto:${email}`}>{email}</a>
+        <span>Software development · Game design</span>
+      </div>
+      <div className="resume-layout">
+        <aside className="resume-aside">
+          <SectionLabel>PROFILE</SectionLabel>
+          <p>Software developer and game designer with experience contributing to a game development internship project. Interested in building considered digital products and interactive experiences.</p>
+        </aside>
+        <div className="resume-main">
+          <section className="resume-section">
+            <SectionLabel>EXPERIENCE</SectionLabel>
+            <article className="resume-entry">
+              <div className="entry-heading">
+                <h2>Game development internship</h2>
+                <span>Internship project</span>
+              </div>
+              <p className="entry-project">Jet Slalom</p>
+              <p>Contributed to a game project as part of an internship.</p>
+            </article>
+          </section>
+          <section className="resume-section">
+            <SectionLabel>SELECTED PROJECTS</SectionLabel>
+            {projects.map((project) => (
+              <article className="resume-entry compact-entry" key={project.slug}>
+                <div className="entry-heading">
+                  <h2>{project.title}</h2>
+                  <span>{project.type}</span>
+                </div>
+                <p>{project.summary}</p>
+              </article>
+            ))}
+          </section>
         </div>
       </div>
-      <div className="pitch-pillars">
-        <p className="section-kicker">WHAT TO EXPECT</p>
-        <div>
-          <article><span>01</span><h3>[The player experience]</h3><p>What a group spends its time doing in Orbellion.</p></article>
-          <article><span>02</span><h3>[A signature rule]</h3><p>A mechanic or choice that makes the game distinct.</p></article>
-          <article><span>03</span><h3>[The setting]</h3><p>A glimpse of the places and stories in this world.</p></article>
-        </div>
+      <p className="resume-note">This online resume reflects the information currently available. Contact me for additional details.</p>
+    </section>
+  )
+}
+
+function ProjectDetail({ project }) {
+  return (
+    <section className="page content-width detail-page">
+      <a className="back-link" href="#/portfolio">← Back to portfolio</a>
+      <div className="detail-header">
+        <SectionLabel>{project.type}</SectionLabel>
+        <h1>{project.title}<span className="accent-dot">.</span></h1>
+        <p>{project.detail}</p>
+      </div>
+      <div className={`detail-visual visual-${project.number}`} aria-hidden="true">
+        <span className="visual-orbit orbit-a" />
+        <span className="visual-orbit orbit-b" />
+        <span className="visual-monogram">{project.number === '01' ? 'JS' : 'AA'}</span>
+      </div>
+      <div className="detail-footer">
+        <span>{project.type}</span>
+        <a className="inline-link" href={`mailto:${email}`}>Ask me about this project <ArrowIcon diagonal /></a>
       </div>
     </section>
   )
+}
+
+function getRoute() {
+  return window.location.hash.slice(1).replace(/^\/+|\/+$/g, '').split('/')
 }
 
 function App() {
-  const [activePage, setActivePage] = useState(currentPage)
+  const [route, setRoute] = useState(getRoute)
 
   useEffect(() => {
-    const updatePage = () => setActivePage(currentPage())
-    window.addEventListener('hashchange', updatePage)
-    return () => window.removeEventListener('hashchange', updatePage)
+    const updateRoute = () => setRoute(getRoute())
+    window.addEventListener('hashchange', updateRoute)
+    return () => window.removeEventListener('hashchange', updateRoute)
   }, [])
+
+  const page = route[0] || 'home'
+  const project = page === 'portfolio' && route[1]
+    ? projects.find((item) => item.slug === route[1])
+    : undefined
+
+  let content
+  if (page === 'portfolio') {
+    content = project ? <ProjectDetail project={project} /> : <PortfolioPage />
+  } else if (page === 'resume') {
+    content = <ResumePage />
+  } else {
+    content = <HomePage />
+  }
 
   return (
     <div className="site-shell">
-      <Header activePage={activePage} />
-      <main>
-        {activePage === 'portfolio' ? <PortfolioPage /> :
-          activePage === 'orbellion' ? <OrbellionPage /> : <HomePage />}
-      </main>
+      <Header activePage={page} />
+      <main key={route.join('/')}>{content}</main>
       <Footer />
     </div>
   )

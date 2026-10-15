@@ -1,16 +1,34 @@
-# React + Vite
+# Asher Marsee — Professional Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A React + Vite website introducing Asher Marsee, presenting selected projects, and providing a printable online resume.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```sh
+npm install
+npm run dev
+```
 
-## React Compiler
+## Site structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The site uses hash routes for static hosting:
 
-## Expanding the Oxlint configuration
+- `#/home` — introduction and selected work
+- `#/portfolio` — project portfolio
+- `#/portfolio/<slug>` — project details
+- `#/resume` — online resume, with print-to-PDF support
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Updating projects
+
+Project content lives in the `projects` array in `src/App.jsx`. Each project has a unique `slug`, `title`, `type`, `summary`, and `detail`. Add further verified project information there as it is ready to share.
+
+## Resume
+
+The resume is rendered as an accessible web page. Use **Print / save as PDF** to print it or save a PDF from the browser. Update the profile and experience in `ResumePage` as additional resume details are available.
+
+## Checks
+
+```sh
+npm run lint
+npm run build
+```

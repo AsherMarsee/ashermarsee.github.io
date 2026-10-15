@@ -242,81 +242,20 @@ p {
   color: var(--accent);
 }
 
-.hero-composition {
-  position: relative;
-  min-height: 400px;
-  display: grid;
-  place-items: center;
+.hero-photo-frame {
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--soft);
 }
 
-.composition-grid {
-  position: absolute;
+.hero-photo {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(#e8ece6 1px, transparent 1px), linear-gradient(90deg, #e8ece6 1px, transparent 1px);
-  background-position: center;
-  background-size: 48px 48px;
-  opacity: 0.72;
-  mask-image: radial-gradient(ellipse, #000 22%, transparent 72%);
-}
-
-.composition-card {
-  position: relative;
-  width: min(340px, 80%);
-  min-height: 324px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px;
-  border: 1px solid #dce2db;
-  background: rgba(251, 252, 250, 0.94);
-  box-shadow: 0 24px 72px rgba(36, 51, 43, 0.09);
-  transform: rotate(2deg);
-}
-
-.composition-kicker,
-.composition-foot,
-.composition-index {
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.12em;
-}
-
-.composition-title {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 37px;
-  letter-spacing: -0.045em;
-  line-height: 1.12;
-}
-
-.composition-title em {
-  color: var(--accent);
-  font-weight: 400;
-}
-
-.composition-rule {
-  width: 35px;
-  height: 1px;
-  background: var(--accent);
-}
-
-.composition-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.composition-foot span:first-child {
-  color: var(--ink);
-  font-weight: 600;
-  letter-spacing: -0.08em;
-}
-
-.composition-index {
-  position: absolute;
-  right: 6px;
-  bottom: 16px;
+  display: block;
+  object-fit: cover;
+  object-position: center 38%;
 }
 
 .intro-band {
@@ -626,115 +565,35 @@ p {
   font-size: 13px;
 }
 
-.resume-top {
+.resume-file-heading {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 30px;
-  padding-bottom: 34px;
+  padding-bottom: 28px;
 }
 
-.resume-top .page-intro h1 {
+.resume-file-heading .page-intro h1 {
   font-size: clamp(42px, 5vw, 58px);
 }
 
-.resume-top .page-intro > p:last-child {
+.resume-file-heading .page-intro > p:last-child {
   color: var(--body);
   font-size: 14px;
 }
 
-.print-button {
-  margin-bottom: 5px;
+.resume-viewer {
+  height: min(1100px, calc(100vh - 260px));
+  min-height: 700px;
+  border: 1px solid var(--line);
+  background: #e8ebe8;
 }
 
-.resume-contact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 32px;
-  padding: 17px 0;
-  border-block: 1px solid var(--line);
-  color: var(--body);
-  font-family: var(--mono);
-  font-size: 10px;
-}
-
-.resume-contact a {
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.resume-layout {
-  display: grid;
-  grid-template-columns: 0.65fr 1.35fr;
-  gap: 90px;
-  padding-top: 46px;
-}
-
-.resume-aside > p {
-  max-width: 300px;
-  margin: 20px 0 0;
-  color: var(--body);
-  font-size: 13px;
-  line-height: 1.85;
-}
-
-.resume-main {
-  display: grid;
-  gap: 48px;
-}
-
-.resume-entry {
-  margin-top: 21px;
-  padding: 0 0 25px;
-  border-bottom: 1px solid var(--line);
-}
-
-.entry-heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.entry-heading h2 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 21px;
-  font-weight: 400;
-}
-
-.entry-heading > span {
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 9px;
-  text-align: right;
-}
-
-.resume-entry > p {
-  margin: 11px 0 0;
-  color: var(--body);
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.resume-entry .entry-project {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.compact-entry {
-  margin-top: 17px;
-  padding-bottom: 18px;
-}
-
-.compact-entry > p {
-  margin-top: 9px;
-}
-
-.resume-note {
-  margin: 37px 0 0;
-  color: var(--muted);
-  font-size: 11px;
+.resume-viewer iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
 }
 
 .detail-page {
@@ -793,8 +652,8 @@ p {
     gap: 25px;
   }
 
-  .hero-composition {
-    min-height: 345px;
+  .hero-photo-frame {
+    height: 385px;
   }
 
   .intro-inner {
@@ -808,9 +667,6 @@ p {
     justify-self: start;
   }
 
-  .resume-layout {
-    gap: 45px;
-  }
 }
 
 @media (max-width: 680px) {
@@ -872,12 +728,8 @@ p {
     margin-top: 27px;
   }
 
-  .hero-composition {
-    min-height: 315px;
-  }
-
-  .composition-card {
-    min-height: 270px;
+  .hero-photo-frame {
+    height: min(115vw, 430px);
   }
 
   .intro-inner {
@@ -962,30 +814,15 @@ p {
     margin-top: 44px;
   }
 
-  .resume-top {
+  .resume-file-heading {
     align-items: start;
     flex-direction: column;
     gap: 18px;
   }
 
-  .resume-layout {
-    grid-template-columns: 1fr;
-    gap: 39px;
-    padding-top: 34px;
-  }
-
-  .resume-aside > p {
-    max-width: 480px;
-  }
-
-  .entry-heading {
-    align-items: start;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .entry-heading > span {
-    text-align: left;
+  .resume-viewer {
+    height: 75vh;
+    min-height: 580px;
   }
 
   .detail-page {
@@ -1004,52 +841,5 @@ p {
   .detail-footer {
     align-items: start;
     flex-direction: column;
-  }
-}
-
-@media print {
-  @page {
-    margin: 18mm;
-  }
-
-  .site-header,
-  .site-footer,
-  .print-button,
-  .resume-note {
-    display: none !important;
-  }
-
-  .site-shell {
-    background: #fff;
-  }
-
-  .page {
-    width: 100%;
-    min-height: 0;
-    padding: 0;
-  }
-
-  .resume-top {
-    padding-bottom: 18px;
-  }
-
-  .resume-top .page-intro h1 {
-    margin-block: 12px 6px;
-    font-size: 36px;
-  }
-
-  .resume-layout {
-    grid-template-columns: 0.65fr 1.35fr;
-    gap: 40px;
-    padding-top: 25px;
-  }
-
-  .resume-main {
-    gap: 25px;
-  }
-
-  .resume-entry {
-    break-inside: avoid;
-    padding-bottom: 14px;
   }
 }

@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import graduatePhoto from './assets/Asher_Grad.jpg'
+import resumePdf from './assets/AsherMarseeCV.pdf'
 import './App.css'
 
 const email = 'asher@ashermarsee.com'
@@ -105,15 +107,8 @@ function HomePage() {
           </div>
           <a className="hero-email" href={`mailto:${email}`}>{email}</a>
         </div>
-        <div className="hero-composition" aria-hidden="true">
-          <div className="composition-grid" />
-          <div className="composition-card">
-            <span className="composition-kicker">SELECTED WORK</span>
-            <span className="composition-title">Ideas into<br /><em>experience.</em></span>
-            <span className="composition-rule" />
-            <span className="composition-foot"><span>AM</span><span>DESIGN · DEVELOPMENT</span></span>
-          </div>
-          <span className="composition-index">01 / 02</span>
+        <div className="hero-photo-frame">
+          <img className="hero-photo" src={graduatePhoto} alt="Asher Marsee in graduation attire" />
         </div>
       </section>
 
@@ -173,52 +168,26 @@ function PortfolioPage() {
 function ResumePage() {
   return (
     <section className="page content-width resume-page">
-      <div className="resume-top">
+      <div className="resume-file-heading">
         <div className="page-intro">
           <SectionLabel>RESUME</SectionLabel>
           <h1>Asher Marsee<span className="accent-dot">.</span></h1>
-          <p>Software developer · Game designer</p>
+          <p>View or download my resume.</p>
         </div>
-        <button className="button button-primary print-button" onClick={() => window.print()} type="button">
-          Print / save as PDF <ArrowIcon />
-        </button>
+        <a className="button button-primary" href={resumePdf} download="AsherMarseeCV.pdf">
+          Download resume <ArrowIcon />
+        </a>
       </div>
-      <div className="resume-contact">
-        <a href={`mailto:${email}`}>{email}</a>
-        <span>Software development · Game design</span>
+      <div className="resume-viewer">
+        <iframe
+          title="Asher Marsee resume"
+          src={resumePdf}
+          width="100%"
+          height="100%"
+        >
+          <p>Your browser can’t display the resume inline. <a href={resumePdf} download="AsherMarseeCV.pdf">Download the PDF</a>.</p>
+        </iframe>
       </div>
-      <div className="resume-layout">
-        <aside className="resume-aside">
-          <SectionLabel>PROFILE</SectionLabel>
-          <p>Software developer and game designer with experience contributing to a game development internship project. Interested in building considered digital products and interactive experiences.</p>
-        </aside>
-        <div className="resume-main">
-          <section className="resume-section">
-            <SectionLabel>EXPERIENCE</SectionLabel>
-            <article className="resume-entry">
-              <div className="entry-heading">
-                <h2>Game development internship</h2>
-                <span>Internship project</span>
-              </div>
-              <p className="entry-project">Jet Slalom</p>
-              <p>Contributed to a game project as part of an internship.</p>
-            </article>
-          </section>
-          <section className="resume-section">
-            <SectionLabel>SELECTED PROJECTS</SectionLabel>
-            {projects.map((project) => (
-              <article className="resume-entry compact-entry" key={project.slug}>
-                <div className="entry-heading">
-                  <h2>{project.title}</h2>
-                  <span>{project.type}</span>
-                </div>
-                <p>{project.summary}</p>
-              </article>
-            ))}
-          </section>
-        </div>
-      </div>
-      <p className="resume-note">This online resume reflects the information currently available. Contact me for additional details.</p>
     </section>
   )
 }

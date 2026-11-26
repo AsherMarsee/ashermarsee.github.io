@@ -185,14 +185,14 @@ function HomePage() {
       <section className="hero content-width section-top">
         <div className="hero-content">
           <SectionLabel>ABOUT ME</SectionLabel>
-          <h1>Hi, I’m Asher<span className="accent-dot">.</span></h1>
+          <h1 className="page-title">Hi, I’m Asher<span className="accent-dot">.</span></h1>
           <p className="hero-summary">
             My name is Nathan Marsee, but I prefer to go by my middle name, Asher. I’m a developer and game designer from Renton, Washington, and I use he/him or they/them pronouns.
           </p>
           <p className="hero-summary">
             While I enjoy playing games, I spend even more time analyzing their design, modifying my favorites, and creating games of my own. I’ve developed several complete video games, including a VR game for UW Medicine.
           </p>
-          <p className="hero-summary">I graduated from Eastern Washington University in December 2025 with a Bachelor of Science in Computer Science, and am enrolled at Bellevue Community College to begin my master's degree.</p>
+          <p className="hero-summary">I graduated from Eastern Washington University in December 2025 with a Bachelor of Science in Computer Science, and am currently enrolled at Bellevue Community College to begin my master's degree.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#/portfolio">Explore my work <ArrowIcon /></a>
             <a className="button button-secondary" href="#/resume">View resume <ArrowIcon diagonal /></a>
@@ -243,7 +243,7 @@ function PortfolioPage() {
     <section className="page content-width section-top">
       <div className="page-intro portfolio-intro">
         <SectionLabel>PORTFOLIO</SectionLabel>
-        <h1>Selected work<span className="accent-dot">.</span></h1>
+        <h1 className="page-title">Selected work<span className="accent-dot">.</span></h1>
         <p>Professional, academic, and personal work across software development and game design.</p>
       </div>
       <div className="project-grid portfolio-grid">
@@ -255,12 +255,12 @@ function PortfolioPage() {
 
 function ResumePage() {
   return (
-    <section className="page content-width resume-page">
+    <section className="page content-width resume-page section-top">
       <div className="resume-file-heading">
         <div className="page-intro">
           <SectionLabel>RESUME</SectionLabel>
-          <h1>Asher Marsee<span className="accent-dot">.</span></h1>
-          <p>View or download my resume.</p>
+          <h1 className="page-title">My resume<span className="accent-dot">.</span></h1>
+          <p>View or download a copy below.</p>
         </div>
         <a className="button button-primary" href={resumePdf} download="AsherMarseeCV.pdf">
           Download resume <ArrowIcon />
@@ -375,7 +375,7 @@ function ProjectDetail({ project }) {
       <a className="back-link" href="#/portfolio">← Back to portfolio</a>
       <div className="detail-header">
         <SectionLabel>{project.type}</SectionLabel>
-        <h1>{project.title}<span className="accent-dot">.</span></h1>
+        <h1 className="page-title">{project.title}<span className="accent-dot">.</span></h1>
         <p>{project.summary}</p>
       </div>
       <div className={`detail-visual project-${project.slug}`} aria-hidden="true">
